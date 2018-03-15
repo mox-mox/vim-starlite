@@ -1,0 +1,90 @@
+*localsearch.txt*	For Vim version 7.3	Last change: 2010 March 15
+*localsearch*
+
+
+             __                     __                          __    ~
+            / /   ____  _________ _/ /_______  ____ ___________/ /_   ~
+           / /   / __ \/ ___/ __ `/ / ___/ _ \/ __ `/ ___/ ___/ __ \  ~
+          / /___/ /_/ / /__/ /_/ / (__  )  __/ /_/ / /  / /__/ / / /  ~
+         /_____/\____/\___/\__,_/_/____/\___/\__,_/_/   \___/_/ /_/   ~
+                                                                    
+
+
+
+                              Reference Manual~
+
+
+==============================================================================
+CONTENTS                                                  *Localsearch-contents*
+
+    1.Intro........................................|localsearch-intro|
+        1.1.Quick start............................|localsearch-quickstart|
+        1.2.Recommended settings...................|localsearch-recommended|
+    2.Functionality provided.......................|localsearch-functionality|
+    3.Commands.....................................|localsearch-commands|
+    7.Compatibility with other software............|localsearch-compatibility|
+        7.1.airline................................|localsearch-airline|
+    8.About........................................|localsearch-about|
+    9.License......................................|localsearch-license|
+
+
+==============================================================================
+1. Intro                                                     *localsearch-intro*
+
+Localsearch is a search plugin that allows a user to have individual search
+terms set for different vim-windows.
+
+Consider a case where you trace a variable through a codebase:
+ * You start in file 1 and search for all occurences of variable A
+ * Variable A is fed into function F in file 2 as variable B
+ * You open file 2 in a new tab|split and want to trace variable B there
+ * When switching between the two vim-windows, you will also have to switch
+ * between the two search terms.
+
+With Localsearch, Vim will automatically take care of that, so that searches
+in one window will not affect the search terms in another window.
+
+------------------------------------------------------------------------------
+1.1. Quick start                                        *localsearch-quickstart*
+
+Upon startup the plugin is inactive so you will get the same global search vim
+offers without this plugin. After calling >Enable_localsearch()<, the local
+search mode will be active and searching will only affect the local window.
+Likewise, calling >Disable_localsearch()< will disable the local search
+option, leaving global searching. You could also use >Toggle_localsearch<
+to switch between local- and global search terms.
+
+------------------------------------------------------------------------------
+1.2. Recommended settings                              *localsearch-recommended*
+
+Localsearch does not have many interface elements. For nearly all purposes,
+setting a button to switch it on or off is sufficient. For example, the
+following snippet will toggle localsearch when pressing <C-/>: >
+    
+	nnoremap  :call Toggle_localsearch()<CR>
+<
+==============================================================================
+7. Compatibility with other software                 *localsearch-compatibility*
+
+------------------------------------------------------------------------------
+7.1. airline                                               *localsearch-airline*
+
+TODO
+
+==============================================================================
+8. About                                                     *localsearch-about*
+
+The maintainer of Localsearch is:
+    mox (GitHub: mox-mox)
+
+Find the latest version of localsearch at:
+
+    http://github.com/mox-mox/vim-localsearch
+
+==============================================================================
+9. License                                                 *localsearch-license*
+
+localsearch is released under the GPL v3.0
+See *LICENSE*
+
+ vim:tw=78:sw=4:ft=help:norl:

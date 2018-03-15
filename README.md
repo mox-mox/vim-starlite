@@ -16,7 +16,7 @@ Localsearch sets independent search terms for different windows when the localse
 
 How do I use it?
 ----------------
-1. Install it using your favorite plugin manager, e.g. plug 'mox-mox/vim-localsearch' for vim-plug.
+1. Install it using your favorite plugin manager, e.g. Plug 'mox-mox/vim-localsearch' for vim-plug.
 2. call Enable_localsearch() to enable and Disable_localsearch() to disable the local search mode.
 3. Map the Toggle_localsearch() function to some key to facilitate usage. For example, using <C-/>:
 	nnoremap  :call Toggle_localsearch()<CR>
