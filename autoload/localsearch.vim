@@ -1,4 +1,6 @@
 
+" Public Functions -------------------------------------------------------------
+
 "{{{
 function! localsearch#Toggle_localsearch()
 	" Turn local search mode on or off
@@ -10,9 +12,8 @@ function! localsearch#Toggle_localsearch()
 endfunction
 "}}}
 
-
 "{{{
-function! localsearch#Toggle_searchterm(term, search_whole_word) " TODO: Set search direction for # mappings
+function! localsearch#Toggle_searchterm(term)
 	" Add or remove a:term to/from the current search term
 	let l:idx = stridx(@/, a:term)
 	if l:idx != -1
@@ -27,27 +28,36 @@ function! localsearch#Toggle_searchterm(term, search_whole_word) " TODO: Set sea
 		let @/     = substitute(@/, l:term, '', 'g')
 		echom 'Removing ' . l:term . ' to get @/ = ' . @/
 	else
-		let l:term = a:search_whole_word ? '\<' . a:term . '\>' : a:term
+		let l:term = g:localsearch_whole_word ? '\<' . a:term . '\>' : a:term
 		let l:term = empty(@/) ? l:term : '\|' . l:term
 		let @/ = @/ . l:term
 		echom 'Adding ' . l:term . ' to get @/ = ' . @/
 	endif
 	call histdel('search', -1)
 	call histadd('search', @/)
-    set hlsearch
-    return ":let v:hlsearch = v:true\<CR>"
 endfunction
 "}}}
 
-""{{{
-"function! localsearch#Toggle_searchterm_visual(search_whole_word)
-"	:call Toggle_searchterm(localsearch#get_visual_selection(), a:search_whole_word)
-"endfunction
-""}}}
+"{{{
+function! localsearch#Toggle_searchterm_visual()
+	let l:term = localsearch#get_visual_selection()
+	" Substitution and literal search logic taken from http://vim.wikia.com/wiki/VimTip171
+	if l:term =~? '^[0-9a-z,_]*$' && ( l:term =~? '^[0-9a-z ,_]*$' || !g:localsearch_literal_search )
+		if g:localsearch_literal_search
+			let l:term = substitute(l:term, '\n', '\\n', 'g')
+		else
+			let l:term = substitute(l:term, '^\_s\+', '\\s\\+', '')
+			let l:term = substitute(l:term, '\_s\+$', '\\s\\*', '')
+			let l:term = substitute(l:term, '\_s\+', '\\_s\\+', 'g')
+		endif
+		let l:term = '\V'. l:term
+	endif
+	:call localsearch#Toggle_searchterm(l:term, v:false)
+endfunction
+"}}}
 
 
-
-" Private functions ------------------------------------------------------------
+" Private Functions ------------------------------------------------------------
 
 "{{{
 function! localsearch#Enable_localsearch()
