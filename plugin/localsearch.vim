@@ -22,16 +22,16 @@ endif
 " Public Mappings
 
 " Toggle window-local searching
-nnoremap <script> <Plug>localsearch_toggle <SID>localsearch_toggle
-nnoremap <silent> <SID>localsearch_toggle :call localsearch#Toggle_localsearch()<cr>
+nnoremap <script> <Plug>toggle_localsearch <SID>toggle_localsearch
+nnoremap <silent> <SID>toggle_localsearch :call localsearch#Toggle_localsearch()<cr>
 
 " Add/Remove word under cursor to current search
-nnoremap <script> <Plug>searchterm_toggle <SID>searchterm_toggle
-nnoremap <silent> <SID>searchterm_toggle :call localsearch#Toggle_searchterm(expand("<cword>"))\|:let v:hlsearch=v:true<CR>"/<CR>
+nnoremap <script> <Plug>add_searchterm <SID>add_searchterm
+nnoremap <silent> <SID>add_searchterm :call localsearch#Toggle_searchterm(expand("<cword>"))\|:let v:hlsearch=v:true<CR>"/<CR>
 
 " Add/Remove selected text to current search
-vnoremap <script> <Plug>searchterm_toggle_visual <SID>searchterm_toggle_visual
-vnoremap <silent> <SID>searchterm_toggle_visual :<C-U>call localsearch#Toggle_searchterm_visual()<CR>\|:let v:hlsearch=v:true<CR>"<C-R>/<CR>
+vnoremap <script> <Plug>add_searchterm_visual <SID>add_searchterm_visual
+vnoremap <silent> <SID>add_searchterm_visual :<C-U>call localsearch#Toggle_searchterm_visual()<CR>\|:let v:hlsearch=v:true<CR>"<C-R>/<CR>
 
 " Toggle g:localsearch_literal_search
 nnoremap <silent> <Plug>toggle_localsearch_literal_search :let g:localsearch_literal_search = !g:localsearch_literal_search
