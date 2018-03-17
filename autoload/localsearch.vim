@@ -1,4 +1,3 @@
-
 " Public Functions -------------------------------------------------------------
 
 "{{{
@@ -13,26 +12,23 @@ endfunction
 "}}}
 
 "{{{
-function! localsearch#Toggle_searchterm(term)
-	" Add or remove a:term to/from the current search term
-	let l:idx = stridx(@/, a:term)
-	if l:idx != -1
-		" If a:term is in the search register (@/), we need to delete it (with
-		" surrounding '\<' and '\>'.
-		" If a:term is the first term in a chain of terms, remove it with a
-		" trailling '\|', else remove the leading '\|'
-		let l:term = stridx(@/, '\<' . a:term . '\>') != -1 ? '\<' . a:term . '\>' : a:term
-		let l:sep1 = stridx(@/, '\|' . l:term       ) != -1 ? '\|' : ''
-		let l:sep2 = (stridx(@/,        l:term . '\|') != -1) && (l:idx == 0 || l:idx== 2) ? '\|' : ''
-		let l:term = substitute(l:sep1 . l:term . l:sep2, '\\', '\\\\', 'g')
-		let @/     = substitute(@/, l:term, '', 'g')
-		echom 'Removing ' . l:term . ' to get @/ = ' . @/
-	else
-		let l:term = g:localsearch_whole_word ? '\<' . a:term . '\>' : a:term
-		let l:term = empty(@/) ? l:term : '\|' . l:term
-		let @/ = @/ . l:term
-		echom 'Adding ' . l:term . ' to get @/ = ' . @/
+function! localsearch#Toggle_searchterm(term, whole_word)
+	""" Add or remove a:term to/from the current search term """
+	let l:searchterms = split(@/, '\\|')
+	let l:index = match(l:searchterms, a:term)
+	if l:index != -1 " a:term is part of s:searchterms -> remove it
+		let l:removed_term = remove(l:searchterms, l:index)
+		echom 'Removing ' . l:removed_term
+
+	else " a:term is a new term -> add it
+		let l:term = a:whole_word ? '\<' . a:term . '\>' : a:term
+		:call add(l:searchterms, l:term)
+		echom 'Adding ' . l:term
 	endif
+
+	let l:new_searchterms = join(l:searchterms, '\|')
+	let @/ = l:new_searchterms
+
 	call histdel('search', -1)
 	call histadd('search', @/)
 endfunction
@@ -42,7 +38,7 @@ endfunction
 function! localsearch#Toggle_searchterm_visual()
 	let l:term = localsearch#get_visual_selection()
 	" Substitution and literal search logic taken from http://vim.wikia.com/wiki/VimTip171
-	if l:term =~? '^[0-9a-z,_]*$' && ( l:term =~? '^[0-9a-z ,_]*$' || !g:localsearch_literal_search )
+	if l:term !~? '^[0-9a-z,_]*$' && ( l:term !~? '^[0-9a-z ,_]*$' || !g:localsearch_literal_search )
 		if g:localsearch_literal_search
 			let l:term = substitute(l:term, '\n', '\\n', 'g')
 		else
@@ -58,6 +54,8 @@ endfunction
 
 
 " Private Functions ------------------------------------------------------------
+
+"{{{ Local Search
 
 "{{{
 function! localsearch#Enable_localsearch()
@@ -95,6 +93,8 @@ function! localsearch#Unset_localsearch()
 endfunction
 "}}}
 
+"}}}
+
 "{{{
 function! localsearch#get_visual_selection()
 	" Source: xolox: https://stackoverflow.com/a/6271254/4360539
@@ -111,4 +111,24 @@ function! localsearch#get_visual_selection()
 endfunction
 "}}}
 
-
+"
+""{{{
+"function! localsearch#list_find(list, term)
+"	""" Find the index and sub-index of term in list """
+"	" Example: list_find(['abc', 'def', 'ghi'], 'ef') returns [1, 1]
+"
+"	"echom 'localsearch#list_search( ' . a:list . ', ' . a:term . ' )'
+"	let l:index    = 0
+"	let l:subindex = 0
+"	while l:index < len(a:list)
+"		let l:subindex = stridx(a:list[l:index], a:term)
+"		if l:subindex != -1
+"			return [l:index, l:subindex]
+"		endif
+"		let l:index = l:index + 1
+"	endwhile
+"
+"	return [-1, -1]
+"endfunction
+""}}}
+"
