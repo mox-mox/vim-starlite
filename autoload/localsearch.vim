@@ -1,15 +1,3 @@
-"" ------------------------------------------------------------------------------
-"" Exit when your app has already been loaded (or "compatible" mode set)
-"if exists("g:loaded_Localsearch") || &cp
-"  finish
-"endif
-"let g:loaded_Localsearch= 0.0.1
-"let s:keepcpo           = &cpo
-"set cpo&vim
-
-
-
-
 
 "{{{
 function! localsearch#Toggle_localsearch()
@@ -113,8 +101,4 @@ function! localsearch#get_visual_selection()
 endfunction
 "}}}
 
-
-"" ------------------------------------------------------------------------------
-"let &cpo= s:keepcpo
-"unlet s:keepcpo
 
