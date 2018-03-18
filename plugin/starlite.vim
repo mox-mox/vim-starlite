@@ -20,11 +20,11 @@ endif
 " Public Mappings --------------------------------------------------------------
 
 " Toggle window-local searching
-nnoremap <script> <Plug>toggle_localsearch <SID>toggle_localsearch
-nnoremap <silent> <SID>toggle_localsearch :call starlite#Toggle_localsearch()<cr>
+nnoremap <script> <Plug>starlite_toggle_localsearch <SID>starlite_toggle_localsearch
+nnoremap <silent> <SID>starlite_toggle_localsearch :call starlite#Toggle_localsearch()<cr>
 
 " Clear last search
-nnoremap <script> <Plug>clear_searchterm :silent let @/= ""<CR>
+nnoremap <script> <Plug>starlite_clear_searchterm :silent let @/= ""<CR>
 
 
 " Add/Remove word under cursor to current search
