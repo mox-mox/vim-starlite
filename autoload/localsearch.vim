@@ -29,17 +29,19 @@ function! localsearch#Toggle_searchterm(term, whole_word)
 	let l:new_searchterms = join(l:searchterms, '\|')
 	let @/ = l:new_searchterms
 
-	call histdel('search', -1)
+	if g:localsearch_replace_history
+		call histdel('search', -1)
+	endif
 	call histadd('search', @/)
 endfunction
 "}}}
 
 "{{{
-function! localsearch#Toggle_searchterm_visual()
+function! localsearch#Toggle_searchterm_visual(literal)
 	let l:term = localsearch#get_visual_selection()
 	" Substitution and literal search logic taken from http://vim.wikia.com/wiki/VimTip171
-	if l:term !~? '^[0-9a-z,_]*$' && ( l:term !~? '^[0-9a-z ,_]*$' || !g:localsearch_literal_search )
-		if g:localsearch_literal_search
+	if l:term !~? '^[0-9a-z,_]*$' && ( l:term !~? '^[0-9a-z ,_]*$' || !a:literal )
+		if a:literal
 			let l:term = substitute(l:term, '\n', '\\n', 'g')
 		else
 			let l:term = substitute(l:term, '^\_s\+', '\\s\\+', '')
