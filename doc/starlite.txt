@@ -115,28 +115,28 @@ If starlite_toggleterm is invoked it will search the current search term for the
 cursorword. If not found, it will be added to the current search word. If
 found, it will be removed instead.
 
-	|starlite_toggleterm_fwd_whole| will forward search for the word under the
+	*starlite_toggleterm_fwd_whole* will forward search for the word under the
 	cursor requiring the whole word to match like * would.
 
-	|starlite_toggleterm_bwd_whole| will backward search for the word under the
+	*starlite_toggleterm_bwd_whole* will backward search for the word under the
 	cursor requiring the whole word to match like # would.
 
-	|starlite_toggleterm_fwd| will forward search for the word under the cursor
+	*starlite_toggleterm_fwd* will forward search for the word under the cursor
 	matching partial words like g* would.
 
-	|starlite_toggleterm_fwd| will backward search for the word under the cursor
+	*starlite_toggleterm_fwd* will backward search for the word under the cursor
 	matching partial words like g# would.
 
-	|starlite_toggleterm_fwd_exact_visual| will forward search for the visual
+	*starlite_toggleterm_fwd_exact_visual* will forward search for the visual
 	selection, using the selected text verbatim.
 
-	|starlite_toggleterm_fwd_exact_visual| will backward search for the visual
+	*starlite_toggleterm_fwd_exact_visual* will backward search for the visual
 	selection, using the selected text verbatim.
 
-	|starlite_toggleterm_fwd_visual| will forward search for the visual
+	*starlite_toggleterm_fwd_visual* will forward search for the visual
 	selection escaping special characters.
 
-	|starlite_toggleterm_fwd_visual| will backward search for the visual
+	*starlite_toggleterm_fwd_visual* will backward search for the visual
 	selection escaping special characters.
 
 ==============================================================================
