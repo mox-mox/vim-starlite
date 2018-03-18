@@ -124,19 +124,19 @@ found, it will be removed instead.
 	*starlite_toggleterm_fwd* will forward search for the word under the cursor
 	matching partial words like g* would.
 
-	*starlite_toggleterm_fwd* will backward search for the word under the cursor
+	*starlite_toggleterm_bwd* will backward search for the word under the cursor
 	matching partial words like g# would.
 
 	*starlite_toggleterm_fwd_exact_visual* will forward search for the visual
 	selection, using the selected text verbatim.
 
-	*starlite_toggleterm_fwd_exact_visual* will backward search for the visual
+	*starlite_toggleterm_bwd_exact_visual* will backward search for the visual
 	selection, using the selected text verbatim.
 
 	*starlite_toggleterm_fwd_visual* will forward search for the visual
 	selection escaping special characters.
 
-	*starlite_toggleterm_fwd_visual* will backward search for the visual
+	*starlite_toggleterm_bwd_visual* will backward search for the visual
 	selection escaping special characters.
 
 ==============================================================================
