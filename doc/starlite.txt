@@ -1,0 +1,107 @@
+*starlite.txt*	For Vim version 7.3	Last change: 2010 March 15
+*starlite*
+
+
+                        _____ __             ___ __         ~
+                       / ___// /_____ ______/ (_) /____     ~
+                       \__ \/ __/ __ `/ ___/ / / __/ _ \    ~
+                      ___/ / /_/ /_/ / /  / / / /_/  __/    ~
+                     /____/\__/\__,_/_/  /_/_/\__/\___/     ~
+                                                            ~
+
+
+
+                              Reference Manual~
+
+
+==============================================================================
+CONTENTS                                                     *starlite-contents*
+
+    1.Intro........................................|starlite-intro|
+        1.1.Quick start............................|starlite-quickstart|
+        1.2.Recommended settings...................|starlite-recommended|
+    2.Functionality provided.......................|starlite-functionality|
+    3.Commands.....................................|starlite-commands|
+    7.Compatibility with other software............|starlite-compatibility|
+        7.1.airline................................|starlite-airline|
+    8.About........................................|starlite-about|
+    9.License......................................|starlite-license|
+
+
+==============================================================================
+1. Intro                                                        *starlite-intro*
+
+Starlite is a collection of search utilities for Vim.
+ * Localsearch allows individual search terms for each window
+ * Toggleterm allows adding and removing words under the cursor to the
+   searchword
+
+Imagine you want to trace a variable trough a codebase:
+ * You start in file 1 and search for all occurences of variable A
+ * Variable A is assigned to Variable B and C so you need to trace those as
+   well. With Toggleterm you just press * on B and C and search for these,
+   too.
+ * Variable B is fed into a function in file 2 as variable D. So you hit the
+   key to switch to Localsearch and open file 2. There you search for variable
+   D.
+ * When you focus file 1 again, Localsearch takes care of switching the
+   searchword back to the on you had in that window.
+
+Starlite provides some <Plug>mappings that need to be mapped to use Starlite,
+and some variables that control the behaviour.
+
+------------------------------------------------------------------------------
+1.1. Quick start                                           *starlite-quickstart*
+
+Upon startup the plugin is inactive so you will get the same global search vim
+offers without this plugin. After calling >Enable_localsearch()<, the local
+search mode will be active and searching will only affect the local window.
+Likewise, calling >Disable_localsearch()< will disable the local search
+option, leaving global searching. You could also use >Toggle_localsearch<
+to switch between local- and global search terms.
+
+------------------------------------------------------------------------------
+1.2. Recommended settings                                 *starlite-recommended*
+
+Starlite does not have many interface elements. For nearly all purposes,
+setting a button to switch it on or off is sufficient. For example, the
+following snippet will toggle starlite when pressing <C-/>: >
+
+	nmap <leader>/ <Plug>toggle_localsearch
+	nmap <leader>* <Plug>clear_searchterm
+
+	nmap         * <Plug>add_searchterm_fwd_whole<Plug>Pulse
+	nmap         # <Plug>add_searchterm_bwd_whole<Plug>Pulse
+	nmap        g* <Plug>add_searchterm_fwd<Plug>Pulse
+	nmap        g# <Plug>add_searchterm_bwd<Plug>Pulse
+
+	vmap         * <Plug>add_searchterm_fwd_visual<Plug>Pulse
+	vmap         # <Plug>add_searchterm_bwd_visual<Plug>Pulse
+	vmap        g* <Plug>add_searchterm_fwd_exact_visual<Plug>Pulse
+	vmap        g# <Plug>add_searchterm_bwd_exact_visual<Plug>Pulse
+<
+==============================================================================
+7. Compatibility with other software                    *starlite-compatibility*
+
+------------------------------------------------------------------------------
+7.1. airline                                                  *starlite-airline*
+
+TODO
+
+==============================================================================
+8. About                                                        *starlite-about*
+
+The maintainer of Starlite is:
+    mox (GitHub: mox-mox)
+
+Find the latest version of starlite at:
+
+    http://github.com/mox-mox/vim-starlite
+
+==============================================================================
+9. License                                                    *starlite-license*
+
+Starlite is released under the GPL v3.0
+See *LICENSE*
+
+ vim:tw=78:sw=4:ft=help:norl:
