@@ -1,3 +1,16 @@
+" ------------------------------------------------------------------------------
+" Exit when your app has already been loaded (or "compatible" mode set)
+if exists("g:loaded_starlite") || &cp
+  finish
+endif
+let g:loaded_starlite   = 001
+let g:loaded_localsearch= 001
+let g:loaded_toggleterm = 001
+let s:keepcpo           = &cpo
+set cpo&vim
+
+
+
 
 " Variables that control the plugin behaviour ----------------------------------
 
@@ -62,3 +75,8 @@ nnoremap <silent> <Plug>starlite_toggle_replace_history :let g:starlite_replace_
 " Toggle g:starlite_jump
 nnoremap <silent> <Plug>starlite_toggle_jump :let g:starlite_jump = !g:starlite_jump
 			\\| echo "starlite_jump " .  (g:starlite_jump ? "On" : "Off")<CR>
+
+
+
+let &cpo= s:keepcpo
+unlet s:keepcpo

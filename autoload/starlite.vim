@@ -8,6 +8,9 @@ function! starlite#Toggle_localsearch()
 	else
 		:call starlite#Enable_localsearch()
 	endif
+	if get(g:, 'loaded_airline_localsearch', 0)
+		call airline#update_statusline()
+	endif
 endfunction
 "}}}
 
