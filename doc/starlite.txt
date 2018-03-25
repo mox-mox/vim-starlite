@@ -21,12 +21,8 @@ CONTENTS                                                     *starlite-contents*
         1.1.Quick start............................|starlite-quickstart|
         1.2.Recommended settings...................|starlite-recommended|
     2.Functionality provided.......................|starlite-functionality|
-        2.1.Localsearch............................|starlite-localsearch|
-        2.2.Toggleterm.............................|starlite-toggleterm|
     3.Settings en detail...........................|starlite-settings|
-    4.Compatibility with other software............|starlite-compatibility|
-        4.1.airline................................|starlite-airline|
-    5.About........................................|starlite-about|
+    4.About........................................|starlite-about|
     6.License......................................|starlite-license|
 
 
@@ -78,66 +74,54 @@ This set of mappings allows you to take full advantage of starlite.
 	nmap <leader>j <Plug>starlite_toggle_jump
 	nmap <leader>r <Plug>starlite_toogle_replace_history
 
-	nmap <leader>/ <Plug>starlite_toggle_localsearch
 	nmap <leader>* <Plug>starlite_clear_searchterm
 
-	nmap         * <Plug>starlite_toggleterm_fwd_whole
-	nmap         # <Plug>starlite_toggleterm_bwd_whole
-	nmap        g* <Plug>starlite_toggleterm_fwd
-	nmap        g# <Plug>starlite_toggleterm_bwd
+	nmap         * <Plug>starlite_fwd_whole
+	nmap         # <Plug>starlite_bwd_whole
+	nmap        g* <Plug>starlite_fwd
+	nmap        g# <Plug>starlite_bwd
 
-	vmap         * <Plug>starlite_toggleterm_fwd_visual
-	vmap         # <Plug>starlite_toggleterm_bwd_visual
-	vmap        g* <Plug>starlite_toggleterm_fwd_exact_visual
-	vmap        g# <Plug>starlite_toggleterm_bwd_exact_visual
+	vmap         * <Plug>starlite_fwd_visual
+	vmap         # <Plug>starlite_bwd_visual
+	vmap        g* <Plug>starlite_fwd_exact_visual
+	vmap        g# <Plug>starlite_bwd_exact_visual
 <
 ==============================================================================
 3. Functionality                                        *starlite-functionality*
 
-------------------------------------------------------------------------------
-3.1. Localsearch                                          *starlite-localsearch*
+Starlite is a set of mappings to modify the current search term. Analog to
+Vims |star| command, these mappings allow searching for the word under the
+cursor (and the current visual selection). In contrast to the built-in star
+command, searching with Starlite will not replace the current search but add
+to it.
 
-Localsearch stores the last search term in a window-local variable (and the
-last global search term in a global variable). When activated, it adds
-autocommands to set/restore the window-local search term as current search
-term (see :help @/).
-
-------------------------------------------------------------------------------
-3.2. Toggleterm                                            *starlite-toggleterm*
-
-Toggleterm is a set of mappings to modify the current search term and the
-namesake of starlite. Analog to Vims |star| command, these mappings allow
-searching for the word under the cursor (and the current visual selection). In
-contrast to the built-in star command, searching with Toggleterm will not
-replace the current search but add to it.
-
-If starlite_toggleterm is invoked it will search the current search term for the
+If starlite is invoked it will search the current search term for the
 cursorword. If not found, it will be added to the current search word. If
 found, it will be removed instead.
 
-	*starlite_toggleterm_fwd_whole* will forward search for the word under the
-	cursor requiring the whole word to match like * would.
+	*starlite_fwd_whole* will forward search for the word under the cursor
+	requiring the whole word to match like * would.
 
-	*starlite_toggleterm_bwd_whole* will backward search for the word under the
-	cursor requiring the whole word to match like # would.
+	*starlite_bwd_whole* will backward search for the word under the cursor
+	requiring the whole word to match like # would.
 
-	*starlite_toggleterm_fwd* will forward search for the word under the cursor
-	matching partial words like g* would.
+	*starlite_fwd* will forward search for the word under the cursor matching
+	partial words like g* would.
 
-	*starlite_toggleterm_bwd* will backward search for the word under the cursor
-	matching partial words like g# would.
+	*starlite_bwd* will backward search for the word under the cursor matching
+	partial words like g# would.
 
-	*starlite_toggleterm_fwd_exact_visual* will forward search for the visual
-	selection, using the selected text verbatim.
+	*starlite_fwd_exact_visual* will forward search for the visual selection,
+	using the selected text verbatim.
 
-	*starlite_toggleterm_bwd_exact_visual* will backward search for the visual
-	selection, using the selected text verbatim.
+	*starlite_bwd_exact_visual* will backward search for the visual selection,
+	using the selected text verbatim.
 
-	*starlite_toggleterm_fwd_visual* will forward search for the visual
-	selection escaping special characters.
+	*starlite_fwd_visual* will forward search for the visual selection
+	escaping special characters.
 
-	*starlite_toggleterm_bwd_visual* will backward search for the visual
-	selection escaping special characters.
+	*starlite_bwd_visual* will backward search for the visual selection
+	escaping special characters.
 
 ==============================================================================
 3. Settings en detail                                        *starlite-settings*
@@ -149,7 +133,7 @@ Currently, Starlite uses only two settings |g:starlite_replace_history| and
 3.1. Replace History                                  *starlite-replace-history*
                                                     *g:starlite_replace_history*
 When appending or removing a search term with one of the
-<Plug>starlite_toggleterm* commands, starlite can either add a new entry into
+<Plug>starlite* commands, starlite can either add a new entry into
 the search history or it can replace/modify the last entry that started the
 search to which a searchterm was added or from which a term was removed.
 
@@ -165,15 +149,7 @@ is set or modified, starlite will jump to the next match if g:starlite_jump is
 set to true.
 
 ==============================================================================
-4. Compatibility with other software                    *starlite-compatibility*
-
-------------------------------------------------------------------------------
-4.1. airline                                                  *starlite-airline*
-
-TODO
-
-==============================================================================
-5. About                                                        *starlite-about*
+4. About                                                        *starlite-about*
 
 The maintainer of Starlite is:
     mox (GitHub: mox-mox)
@@ -183,7 +159,7 @@ Find the latest version of starlite at:
     http://github.com/mox-mox/vim-starlite
 
 ==============================================================================
-6. License                                                    *starlite-license*
+5. License                                                    *starlite-license*
 
 Starlite is released under the GPL v3.0
 See *LICENSE*

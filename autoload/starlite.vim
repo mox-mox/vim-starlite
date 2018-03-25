@@ -1,20 +1,6 @@
 " Public Functions -------------------------------------------------------------
 
 "{{{
-function! starlite#Toggle_localsearch()
-	" Turn local search mode on or off
-	if exists('#starlite#WinEnter')
-		:call starlite#Disable_localsearch()
-	else
-		:call starlite#Enable_localsearch()
-	endif
-	if get(g:, 'loaded_airline_localsearch', 0)
-		call airline#update_statusline()
-	endif
-endfunction
-"}}}
-
-"{{{
 function! starlite#Toggle_searchterm(term, whole_word, direction)
 	""" Add or remove a:term to/from the current search term """
 	let l:searchterms = split(@/, '\\|')
@@ -61,48 +47,6 @@ endfunction
 
 " Private Functions ------------------------------------------------------------
 
-"{{{ Localsearch
-
-"{{{
-function! starlite#Enable_localsearch()
-	augroup starlite
-		autocmd!
-		autocmd WinEnter * :call starlite#Set_localsearch()
-		autocmd WinLeave * :call starlite#Unset_localsearch()
-		"autocmd WinEnter * :execute 'silent !notify-send "WinEnter"'
-		"autocmd WinLeave * :execute 'silent !notify-send "WinLeave"'
-	augroup END
-	:call starlite#Set_localsearch()
-endfunction
-"}}}
-
-"{{{
-function! starlite#Disable_localsearch()
-	:call starlite#Unset_localsearch()
-	augroup starlite
-		autocmd!
-	augroup END
-endfunction
-"}}}
-
-"{{{
-function! starlite#Set_localsearch()
-	let g:last_search = @/
-	let @/ = get(w:, 'last_search', '')
-endfunction
-"}}}
-
-"{{{
-function! starlite#Unset_localsearch()
-	let w:last_search = @/
-	let @/ = get(g:, 'last_search', '')
-endfunction
-"}}}
-
-"}}}
-
-"{{{ Toggleterm
-
 "{{{
 function! starlite#get_visual_selection()
 	" Source: xolox: https://stackoverflow.com/a/6271254/4360539
@@ -117,6 +61,4 @@ function! starlite#get_visual_selection()
     let lines[0] = lines[0][column_start - 1:]
     return join(lines, "\n")
 endfunction
-"}}}
-
 "}}}

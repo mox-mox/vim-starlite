@@ -1,12 +1,8 @@
-Starlite a collection of Search-centered Vim/NeoVim Plugins
-===========================================================
+Starlite - Search for a Word Under Vims Cursor
+==============================================
 
-Localsearch
------------
-Turn on Localsearch, search one thing in one window, switch to another window and search for something else. Switch back and forth and the searchterm is updated to the one pertaining to the respective window.
-
-Toggleterm
-----------
+What does it do?
+----------------
 Add the word under the cursor to the current search at the press of a key. Also works for visual selection.
 
 
@@ -15,9 +11,10 @@ Wait, what? Why?
 ----------------
 Imagine you want to trace a variable trough a codebase:
  * You start in *file 1* and search for all occurences of *variable A*
- * *Variable A* is assigned to *variable B* and *variable C* so you need to trace those as well. With **Toggleterm** you just press ` * ` on *B* and *C* and search for these, too.
- * *Variable B* is fed into a function in *file 2* as *variable D*. So you hit the key to switch to **Localsearch** and open *file 2*. There you search for *variable D*.
- * When you focus *file 1* again, Localsearch takes care of switching the searchword back to the on you had in that window.
+ * *Variable A* is assigned to *variable B* and *variable C* so you need to trace those as well.
+ * With **Starlite** you just press ` * ` on *B* and *C* and search for these,
+   too. They will not replace the old search word, so now you are searching for
+   all three words (*A*, *B*, *C*)
  * FANCY
 
 
@@ -25,12 +22,6 @@ How do I use it?
 ----------------
 1. Install it using your favorite plugin manager, e.g. `Plug 'mox-mox/vim-starlite'` for vim-plug.
 2. Copy the mappings in :help starlite-recommended into your .vimrc/init.vim
-3. Open a file, hit <leader>/ to enable localsearch. Open a split, move the
-   cursor over a word and press ` * `. Vim will search for that word as it would
-   without starlight. Now, move the cursor over another word and press ` * ` again.
-   Instead of replacing the search term, Vim will now search for both terms.
-4. Now, move back to the first split window. The search highlighting will
-   disappear. Search for something, then move back to the second window. Your
-   search in the second window will be re-activated. Fancy again!
+3. Continue using Vim the way you did. But search for multiple words with one key press ;)
 
 
