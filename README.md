@@ -5,6 +5,14 @@ What does it do?
 ----------------
 Add the word under the cursor to the current search at the press of a key. Also works for visual selection.
 
+I've already got `*`, what's new here?
+--------------------------------------
+When you press `*` on a word (that is with the cursor over that word), vim will
+search for that word.  To do so, it will *replace* the current search word.
+With this plugin, the word gets *added* to the search word. That means vim will
+now search for all occurences of the previous and the newly added word. You can
+press `*` on the word again and it will be removed from the search.
+
 
 
 Wait, what? Why?
