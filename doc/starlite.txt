@@ -20,7 +20,7 @@ CONTENTS                                                     *starlite-contents*
     1.Intro........................................|starlite-intro|
         1.1.Quick start............................|starlite-quickstart|
         1.2.Recommended settings...................|starlite-recommended|
-    2.Functionality provided.......................|starlite-functionality|
+    2.Provided Mappings............................|starlite-mappings|
     3.Settings en detail...........................|starlite-settings|
     4.About........................................|starlite-about|
     6.License......................................|starlite-license|
@@ -69,59 +69,61 @@ search in the second window will be re-activated. Fancy again!
 
 Starlite does not have any interface elements except some mappings and a few
 variables that control some of its behaviour.
-This set of mappings allows you to take full advantage of starlite.
+This set of mappings allows you to take advantage of most of starlite.
  >
+	let g:starlite_jump = v:false
 	nmap <leader>j <Plug>starlite_toggle_jump
 	nmap <leader>r <Plug>starlite_toogle_replace_history
 
-	nmap <leader>* <Plug>starlite_clear_searchterm
+	map         * <Plug>starlite_fwd_x_rpl<Plug>Pulse
+	map        g* <Plug>starlite_fwd_i_rpl<Plug>Pulse
 
-	nmap         * <Plug>starlite_fwd_whole
-	nmap         # <Plug>starlite_bwd_whole
-	nmap        g* <Plug>starlite_fwd
-	nmap        g# <Plug>starlite_bwd
-
-	vmap         * <Plug>starlite_fwd_visual
-	vmap         # <Plug>starlite_bwd_visual
-	vmap        g* <Plug>starlite_fwd_exact_visual
-	vmap        g# <Plug>starlite_bwd_exact_visual
+	map         # <Plug>starlite_fwd_x_add<Plug>Pulse
+	map        g# <Plug>starlite_fwd_i_add<Plug>Pulse
 <
+Note: `#` and `g#` are by default the backward-searching versions of `*` and
+`g*` so using these settings looses those.
+
 ==============================================================================
-3. Functionality                                        *starlite-functionality*
+3. Mappings                                                  *starlite-mappings*
 
 Starlite is a set of mappings to modify the current search term. Analog to
 Vims |star| command, these mappings allow searching for the word under the
-cursor (and the current visual selection). In contrast to the built-in star
-command, searching with Starlite will not replace the current search but add
-to it.
+cursor (and the current visual selection). The word can either replace the
+current search word (like Vims default) or be appended to it.
 
-If starlite is invoked it will search the current search term for the
+If starlite is invoked it will search the current search term ('@/') for the
 cursorword. If not found, it will be added to the current search word. If
 found, it will be removed instead.
 
-	*starlite_fwd_whole* will forward search for the word under the cursor
-	requiring the whole word to match like * would.
 
-	*starlite_bwd_whole* will backward search for the word under the cursor
-	requiring the whole word to match like # would.
+	*<Plug>starlite_fwd_x_add* will forward search for the word under the
+	cursor requiring the whole word to match like * would.
 
-	*starlite_fwd* will forward search for the word under the cursor matching
-	partial words like g* would.
+	*<Plug>starlite_fwd_i_add* will forward search for the word under the
+	cursor matching partial words like g* would.
 
-	*starlite_bwd* will backward search for the word under the cursor matching
-	partial words like g# would.
+	*<Plug>starlite_bwd_x_add* will backward search for the word under the
+	cursor requiring the whole word to match like # would.
 
-	*starlite_fwd_exact_visual* will forward search for the visual selection,
-	using the selected text verbatim.
+	*<Plug>starlite_bwd_i_add* will backward search for the word under the
+	cursor matching partial words like g# would.
 
-	*starlite_bwd_exact_visual* will backward search for the visual selection,
-	using the selected text verbatim.
+	*<Plug>starlite_fwd_x_rpl* like |<Plug>starlite_fwd_x_add| but will
+	replace the current search word instead of appending/removing.
 
-	*starlite_fwd_visual* will forward search for the visual selection
-	escaping special characters.
+	*<Plug>starlite_fwd_i_rpl* like |<Plug>starlite_fwd_i_add| but will
+	replace the current search word instead of appending/removing.
 
-	*starlite_bwd_visual* will backward search for the visual selection
-	escaping special characters.
+	*<Plug>starlite_bwd_x_rpl* like |<Plug>starlite_bwd_x_add| but will
+	replace the current search word instead of appending/removing.
+
+	*<Plug>starlite_bwd_i_rpl* like |<Plug>starlite_bwd_i_add| but will
+	replace the current search word instead of appending/removing.
+
+	*<Plug>starlite_toggle_jump* Toggles |g:starlite_jump|.
+
+	*<Plug>starlite_toogle_replace_history* Toggles |g:starlite_replace_history|.
 
 ==============================================================================
 3. Settings en detail                                        *starlite-settings*
