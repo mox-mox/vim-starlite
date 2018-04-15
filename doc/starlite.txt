@@ -1,4 +1,4 @@
-*starlite.txt*	For Vim version 7.3	Last change: 2010 March 15
+*starlite.txt*	For Vim version 7.3	Last change: 2018 April 15
 *starlite*
 
 
@@ -30,7 +30,6 @@ CONTENTS                                                     *starlite-contents*
 1. Intro                                                        *starlite-intro*
 
 Starlite is a collection of search utilities for Vim.
- * Localsearch allows individual search terms for each window
  * Toggleterm allows adding and removing words under the cursor to the
    searchword
 

@@ -21,7 +21,7 @@ if !exists('g:starlite_replace_history')
 endif
 
 " g:starlite_jump:
-" Jump to next result after starting a search like the default word search '*'
+" Jump to next result after starting a search, like the default word search '*'
 " does
 if !exists('g:starlite_jump')
 	let g:starlite_jump = v:true
@@ -57,12 +57,12 @@ vnoremap <script> <Plug>starlite_bwd_x_rpl :<C-U>execute starlite#Search(v:true,
 vnoremap <script> <Plug>starlite_bwd_i_rpl :<C-U>execute starlite#Search(v:true,  v:false, v:false,  v:true )<CR>
 
 " Toggle g:starlite_replace_history
-nnoremap <silent> <Plug>starlite_toggle_replace_history :let g:starlite_replace_history = !g:starlite_replace_history
-			\\| echo "starlite_replace_history " .  (g:starlite_replace_history ? "On" : "Off")<CR>
+command StarliteToggleReplaceHistory :call starlite#toggle_replace_history()
+nnoremap <silent> <Plug>starlite_toggle_replace_history :StarliteToggleReplaceHistory<CR>
 
 " Toggle g:starlite_jump
-nnoremap <silent> <Plug>starlite_toggle_jump :let g:starlite_jump = !g:starlite_jump
-			\\| echo "starlite_jump " .  (g:starlite_jump ? "On" : "Off")<CR>
+command StarliteToggleJump :call starlite#toggle_jump()
+nnoremap <silent> <Plug>starlite_toggle_jump :StarliteToggleJump<CR>
 
 let &cpo= s:keepcpo
 unlet s:keepcpo
