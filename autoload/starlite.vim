@@ -39,7 +39,39 @@ function! starlite#Search(visual_mode, search_forward, exact, replace)
 endfunction
 "}}}
 
+"{{{
+function! starlite#toggle_replace_history()
+	let g:starlite_replace_history = !g:starlite_replace_history
+	echo "starlite_replace_history " .  (g:starlite_replace_history ? "On" : "Off")
+endfunction
+"}}}
+
+"{{{
+function! starlite#toggle_jump()
+	let g:starlite_jump = !g:starlite_jump
+	echo "starlite_jump " .  (g:starlite_jump ? "On" : "Off")
+endfunction
+"}}}
+
+"{{{
+function! starlite#is_auto_highlight_active()
+	return exists('#starlite#CursorHold') || exists('#starlite#CursorMoved')
+endfunction
+"}}}
+
+"{{{
+function! starlite#toggle_auto_highlight()
+	if starlite#is_auto_highlight_active()
+		:call starlite#disable_auto_highlight()
+	else
+		:call starlite#enable_auto_highlight()
+	endif
+endfunction
+"}}}
+
 " Private Functions ------------------------------------------------------------
+
+"{{{ Get visual selection
 
 "{{{
 function! starlite#get_visual_selection() range
@@ -73,4 +105,65 @@ function! starlite#get_visual_searchterm(literal)
 	endif
 	return l:term
 endfunction
+"}}}
+"}}}
+
+"{{{ Auto highlighting
+
+"{{{
+function! starlite#auto_highlight_set_highlight()
+	exec printf('highlight Autohighlight ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s', 
+		\ get(g:starlite_auto_highlight, 'ctermfg', 'NONE'),
+		\ get(g:starlite_auto_highlight, 'ctermbg', 'NONE'),
+		\ get(g:starlite_auto_highlight, 'cterm', 'NONE'),
+		\ get(g:starlite_auto_highlight, 'guifg', 'NONE'),
+		\ get(g:starlite_auto_highlight, 'guibg', 'NONE'),
+		\ get(g:starlite_auto_highlight, 'gui', 'NONE'),
+		\)
+endfunction
+"}}}
+
+"{{{
+function! starlite#enable_auto_highlight()
+	call starlite#auto_highlight_set_highlight()
+	if g:starlite_auto_highlight_command ==? 'CursorHold'
+		augroup starlite
+			autocmd!
+			autocmd CursorHold * :call starlite#match_cword()
+		augroup END
+	elseif g:starlite_auto_highlight_command ==? 'CursorMoved'
+		augroup starlite
+			autocmd!
+			autocmd CursorMoved * :call starlite#match_cword()
+		augroup END
+	else
+		echoerr 'Please set g:starlite_auto_highlight_command to either CursorMoved or CursorHold'
+		return
+	endif
+	echo 'Highlight current word: ON'
+endfunction
+"}}}
+
+"{{{
+function! starlite#disable_auto_highlight()
+	augroup starlite
+		autocmd!
+	augroup END
+	if get(w:, 'autohighlight_matcher', -1) != -1
+		call matchdelete(w:autohighlight_matcher)
+	endif
+	let w:autohighlight_matcher = -1
+	highlight clear Autohighlight
+	echo 'Highlight current word: off'
+endfunction
+"}}}
+
+"{{{
+function! starlite#match_cword()
+	if get(w:, 'autohighlight_matcher', -1) != -1
+		call matchdelete(w:autohighlight_matcher)
+	endif
+	let w:autohighlight_matcher = matchadd("Autohighlight", '\V\<'.escape(expand('<cword>'), '/\').'\>' )
+endfunction
+"}}}
 "}}}
